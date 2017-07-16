@@ -3,6 +3,7 @@ import datetime
 import sys
 
 import colorit
+import readchar
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-t', '--tty', help="tty name for logs")
@@ -37,6 +38,11 @@ def dump_to_file(task_title, start_time, end_time):
 while 1:
     task_title = raw_input("Enter title to your new task: ")
     start = datetime.datetime.now()
-    ends = raw_input("Hit enter to end this task and start a new one")
+    print "press q to quit logging, n to quit this log, any other key otherwise"
+    ends = readchar.readchar()
+    if ends == 'q' or ends == 'Q':
+        break
+    if ends == 'n' or ends == 'N':
+        continue
     end = datetime.datetime.now()
     dump_to_file(task_title, start, end)
